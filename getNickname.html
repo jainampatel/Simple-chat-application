@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Enter Nickname</title>
+  </head>
+  <body>
+    <div class="center">
+      <form id="form">
+        <input id="nickname" placeholder="Enter your nickname" />
+        <button>Submit</button>
+      </form>
+    </div>
+    <script>
+      var form = document.getElementById("form");
+      var input = document.getElementById("nickname");
+
+      form.addEventListener("submit", () => {
+        window.localStorage.setItem("nickname", input.value);
+      });
+    </script>
+  </body>
+</html>
