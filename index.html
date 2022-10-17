@@ -74,6 +74,9 @@
       <button type="submit">
         <i class="fa fa-paper-plane" style="font-size: 18px"></i>
       </button>
+      <button type="button">
+        <i class="fa fa-paper-remove" style="font-size: 18px"></i>
+      </button>
     </form>
     <script src="/socket.io/socket.io.js"></script>
     <script>
@@ -91,6 +94,14 @@
         }
       });
 
+      form.addEventListener("button", (e) => {
+        e.preventDefault();
+        if (input.value) {
+          socket.emit("delete message", input.value);
+          input.value = "";
+        }
+      });
+
       socket.on("connection", (msg) => {
         var item = document.createElement("li");
         item.textContent = msg;
@@ -99,6 +110,13 @@
       });
 
       socket.on("chat message", (msg) => {
+        var item = document.createElement("li");
+        item.textContent = msg;
+        messages.appendChild(item);
+        window.scrollTo(0, document.body.scrollHeight);
+      });
+
+      socket.on("delete message", (msg) => {
         var item = document.createElement("li");
         item.textContent = msg;
         messages.appendChild(item);
